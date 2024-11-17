@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What if the Lamppost in The Little Prince Had to Turn On and Off Every 0 Seconds?</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 1.5em;
+        }
+
+        .section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            background: white;
+            padding: 2em;
+            margin: 2em 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .simulator {
+            text-align: center;
+            padding: 2em;
+            margin: 2em 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .light {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 20px auto;
+            transition: background-color 0.1s;
+        }
+
+        .light.on {
+            background-color: #ffd700;
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.5);
+        }
+
+        .light.off {
+            background-color: #808080;
+        }
+
+        .controls {
+            margin: 20px 0;
+        }
+
+        .controls input {
+            padding: 8px;
+            width: 80px;
+            margin: 0 10px;
+            text-align: center;
+        }
+
+        .info-display {
+            margin: 15px 0;
+            font-size: 1.1em;
+        }
+
+        .conclusion {
+            font-style: italic;
+            background: #f8f9fa;
+            padding: 20px;
+            border-left: 4px solid #2c3e50;
+            margin-top: 2em;
+        }
+
+        .hint {
+            color: #666;
+            font-size: 0.9em;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>What if the Lamppost in The Little Prince Had to Turn On and Off Every 0 Seconds?</h1>
+
+        <div class="section" id="intro">
+            <p>In The Little Prince, our hero meets a lamplighter on a tiny planet. Following his orders dutifully, this dedicated character must light his lamp at sunset and extinguish it at sunrise. This task was once simple, as his planet rotated at a reasonable pace with normal-length days and nights. But over time, the rotation of his planet has accelerated, making days and nights increasingly shorter, transforming his mission into a frantic ballet of lighting and extinguishing.</p>
+        </div>
+
+        <div class="section" id="simple-simulator">
+            <p>Let's call "d" the variable that determines the time in seconds of one night in a world where nights and days are of equal duration. So we have a simple lamp that blinks every d seconds (knowing that we start at night, the lamp starts in the ON position):</p>
+            
+            <div class="simulator">
+                <div class="light on" id="light1"></div>
+                <div class="controls">
+                    <label for="d-input1">Delay (sec):</label>
+                    <input type="number" id="d-input1" value="2" min="0.01" step="0.01">
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="complete-simulator">
+            <p>Now let's add a few things to our lamp. First, let's call T the variable that counts time. If we perform integer division of T by d, we'll get the number of nights and days that have occurred so far, as T represents the total time and d is the duration of one day. We'll call this number I. Also knowing that we start with the lamp ON and that it turns ON and OFF opposite to daylight, we therefore know that if I is even, the lamp is ON, and if I is odd, it's OFF.</p>
+
+            <div class="simulator">
+                <div class="light on" id="light2"></div>
+                <div class="info-display">
+                    <div id="time-display">T = 0 seconds</div>
+                    <div id="quotient-display">I = 0 (T/d)</div>
+                    <div id="parity-display">I is EVEN</div>
+                </div>
+                <div class="controls">
+                    <label for="d-input2">Delay (sec):</label>
+                    <input type="number" id="d-input2" value="4" min="0.01" step="0.01">
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="final-simulator">
+            <p>Now finally, we can make d approach 0 to see what happens. You can try it yourself, but I recommend not going below 0.01, as the computer will struggle to visualize it otherwise:</p>
+            
+            <div class="simulator">
+                <div class="light on" id="light3"></div>
+                <div class="info-display">
+                    <div id="time-display3">T = 0 seconds</div>
+                    <div id="quotient-display3">I = 0 (T/d)</div>
+                    <div id="parity-display3">I is EVEN</div>
+                </div>
+                <div class="controls">
+                    <label for="d-input3">Delay (sec):</label>
+                    <input type="number" id="d-input3" value="0.1" min="0.01" step="0.01">
+                </div>
+                <p class="hint">Try gradually decreasing the value of d...</p>
+            </div>
+        </div>
+
+        <div class="section" id="conclusion">
+            <h2>What can we conclude?</h2>
+            <p>Two things. First, as we can see that I increases exponentially as d approaches 0 (which makes sense because if days and nights become shorter, we'll count more of them in less time), we can deduce that if d tends toward 0, then T/d will tend toward infinity.</p>
+            <p>Second, we can also suppose that when d approaches 0, the light will blink so fast that it would be impossible to tell whether it's ON or OFF. It would be in a kind of fusion state, both ON and OFF at the same time. Since the light is both ON and OFF, this would mean that T/d is both even and odd.</p>
+            <p class="conclusion">This doesn't really make sense. If a number is not divisible by two (odd), it cannot at the same time be divisible by two (even). This leads to a contradiction and perfectly illustrates both why we cannot divide by 0 and why dividing by a number that tends toward 0 gives a number that tends toward infinity.</p>
+        </div>
+    </div>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Light simulator class
+        class LightSimulator {
+            constructor(lightId, inputId, timeDisplayId, quotientDisplayId, parityDisplayId) {
+                this.light = document.getElementById(lightId);
+                this.input = document.getElementById(inputId);
+                this.timeDisplay = document.getElementById(timeDisplayId);
+                this.quotientDisplay = document.getElementById(quotientDisplayId);
+                this.parityDisplay = document.getElementById(parityDisplayId);
+                this.startTime = Date.now();
+                this.d = parseFloat(this.input.value);
+                
+                this.input.addEventListener('change', () => this.updateDelay());
+                this.animate();
+            }
+
+            updateDelay() {
+                this.d = parseFloat(this.input.value);
+                this.startTime = Date.now();
+            }
+
+            animate() {
+                const elapsedTime = (Date.now() - this.startTime) / 1000;
+                const I = Math.floor(elapsedTime / this.d);
+                const isEven = I % 2 === 0;
+
+                this.light.className = `light ${isEven ? 'on' : 'off'}`;
+
+                if (this.timeDisplay) {
+                    this.timeDisplay.textContent = `T = ${elapsedTime.toFixed(2)} seconds`;
+                    this.quotientDisplay.textContent = `I = ${I} (T/d)`;
+                    this.parityDisplay.textContent = `I is ${isEven ? 'EVEN' : 'ODD'}`;
+                }
+
+                requestAnimationFrame(() => this.animate());
+            }
+        }
+
+        // Initialize simulators
+        const simulator1 = new LightSimulator('light1', 'd-input1');
+        const simulator2 = new LightSimulator('light2', 'd-input2', 'time-display', 'quotient-display', 'parity-display');
+        const simulator3 = new LightSimulator('light3', 'd-input3', 'time-display3', 'quotient-display3', 'parity-display3');
+    </script>
+</body>
+</html>
